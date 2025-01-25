@@ -186,6 +186,33 @@ class Folder {
 
     console.log(`File name successfully updated from "${oldName}" to "${newName}".`);
   }
+
+  /**
+ * Read the content of a file.
+ * @param {string} data - The name of the file to read.
+ */
+  readFile(data) {
+    if (!data || data.length < 1) {
+      console.log("No file name provided.");
+      return;
+    }
+
+    const fileName = data[0];
+    const fileItem = this.items[fileName];
+
+    if (!fileItem) {
+      console.log(`File with name "${fileName}" not found.`);
+      return;
+    }
+
+    if (fileItem instanceof Folder) {
+      console.log(`"${fileName}" is a folder, not a file.`);
+      return;
+    }
+
+    console.log(`Content of "${fileName}":`, fileItem.content);
+  }
+
 }
 
 module.exports = Folder;

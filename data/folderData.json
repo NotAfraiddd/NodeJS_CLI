@@ -1,26 +1,35 @@
 {
   "name": "root",
   "items": {
-    "a": {
-      "name": "a",
+    "notes": {
+      "name": "notes",
       "items": {
-        "a1": {
-          "name": "a1",
-          "content": "a1"
+        "todo.txt": {
+          "name": "todo.txt",
+          "content": "Buy groceries, finish project."
+        },
+        "ideas.txt": {
+          "name": "ideas.txt",
+          "content": "Build a task management app."
         }
       }
     },
-    "b.txt": {
-      "name": "b.txt",
-      "content": "pp"
+    "images": {
+      "name": "images",
+      "items": {
+        "photo1.jpg": {
+          "name": "photo1.jpg",
+          "content": "binary-image-data"
+        },
+        "photo2.png": {
+          "name": "photo2.png",
+          "content": "binary-image-data"
+        }
+      }
     },
-    "c.pdf": {
-      "name": "c.pdf",
-      "content": "ako"
-    },
-    "d.txt": {
-      "name": "d.txt",
-      "content": "ako"
+    "readme.txt": {
+      "name": "readme.txt",
+      "content": "This is the root folder."
     }
   }
 }

@@ -13,15 +13,16 @@ const rl = readline.createInterface({
 
 const commands = `
 Commands:
-1. add-file                               ==> 1 [name] [content]
-2. add-folder [name]                      ==> 2 [name]
-3. update-name-file                       ==> 3 [oldFile] [newFile]
-4. update-name-folder                     ==> 4 [oldFolder] [newFolder]
-5. remove [name]                          ==> 5 [name]
-6. display                                ==> 6
-7. search [name]                          ==> 7 [name]
-8. cd [folderName] / cd ..                ==> 8 cd [folderName] / 6 cd .. ( back to nearest parent directory )
-9. exit                                   ==> 9
+1. add-file                               ==> a-file [name] [content]
+2. add-folder                             ==> a-folder [name]
+3. update-name-file                       ==> u-file [oldFile] [newFile]
+4. update-name-folder                     ==> u-folder [oldFolder] [newFolder]
+5. read file                              ==> r-file [name-file]
+6. delete                                 ==> d [name file/folder]
+7. display                                ==> show
+8. search                                 ==> s [name file/folder]
+9. cd [folderName] / cd ..                ==> g-cd [folderName] / go cd .. ( back to nearest parent directory )
+10. exit                                  ==> e
 `;
 
 console.log('Folder Tree CLI');
@@ -31,40 +32,46 @@ const executeCommand = (input) => {
   const [cmd, ...args] = input.trim().split(' ');
 
   try {
+    console.log(cmd);
+
     switch (cmd) {
-      case '1':
+      case 'a-file':
         addFile(currentFolder, args);
         break;
 
-      case '2':
+      case 'a-folder':
         addFolder(currentFolder, args);
         break;
 
-      case '3':
+      case 'u-file':
         updateNameFile(currentFolder, args);
         break;
 
-      case '4':
+      case 'u-folder':
         updateNameFolder(currentFolder, args);
         break;
 
-      case '5':
+      case 'r-file':
+        currentFolder.readFile(args);
+        break;
+
+      case 'd':
         removeItem(currentFolder, args);
         break;
 
-      case '6':
+      case 'show':
         display(currentFolder);
         break;
 
-      case '7':
+      case 's':
         search(root, args);
         break;
 
-      case '8':
+      case 'g':
         currentFolder = navigate(currentFolder, args, pathStack);
         break;
 
-      case '9':
+      case 'e':
         console.log('Goodbye!');
         rl.close();
         return;
