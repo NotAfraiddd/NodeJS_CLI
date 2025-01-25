@@ -60,3 +60,6 @@ Explain: Perform different behavior based on the class **File** và **Folder**
 
 **4. Abstraction** 
 Explain: Hides the complex details of internal operations, providing only a simple interface through methods.
+
+Link introduce:
+https://github.com/NotAfraiddd/NodeJS_CLI/wiki/Instructions
