@@ -21,7 +21,7 @@ Commands:
 6. delete                                 ==> d [name file/folder]
 7. display                                ==> show
 8. search                                 ==> s [name file/folder]
-9. cd [folderName] / cd ..                ==> g-cd [folderName] / go cd .. ( back to nearest parent directory )
+9. cd [folderName] / cd ..                ==> g cd [folderName] / g cd .. ( back to nearest parent directory )
 10. exit                                  ==> e
 `;
 
@@ -32,8 +32,6 @@ const executeCommand = (input) => {
   const [cmd, ...args] = input.trim().split(' ');
 
   try {
-    console.log(cmd);
-
     switch (cmd) {
       case 'a-file':
         addFile(currentFolder, args);
