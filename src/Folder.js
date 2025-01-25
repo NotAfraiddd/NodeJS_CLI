@@ -144,17 +144,47 @@ class Folder {
    * @param {string} newName - New folder name.
    */
   updateNameFolder(oldName, newName) {
+    if (this.parent) {
+      if (this.parent.items[newName]) {
+        console.log(`A folder with the name "${newName}" already exists in the parent folder.`);
+        return;
+      }
+      const folderItem = this.parent.items[oldName];
+      if (!folderItem) {
+        console.log(`Folder with name "${oldName}" not found in parent.`);
+        return;
+      }
+      folderItem.name = newName;
+      this.parent.items[newName] = folderItem;
+      delete this.parent.items[oldName];
+    }
+
+    this.name = newName;
+    console.log(`Folder name successfully updated to "${newName}".`);
+  }
+
+  /**
+* Update name of a file.
+* @param {string} oldName - Old file name.
+* @param {string} newName - New file name.
+*/
+  updateNameFile(oldName, newName) {
     if (this.items[newName]) {
-      console.log(`A folder with the name "${newName}" already exists.`);
+      console.log(`A file or folder with the name "${newName}" already exists.`);
       return;
     }
 
-    const folderItem = this.items[oldName];
-    folderItem.name = newName;
-    this.items[newName] = folderItem;
+    const fileItem = this.items[oldName];
+    if (!fileItem || fileItem instanceof Folder) {
+      console.log(`File with name "${oldName}" not found.`);
+      return;
+    }
+
+    fileItem.name = newName;
+    this.items[newName] = fileItem;
     delete this.items[oldName];
 
-    console.log(`Folder name updated from "${oldName}" to "${newName}".`);
+    console.log(`File name successfully updated from "${oldName}" to "${newName}".`);
   }
 }
 

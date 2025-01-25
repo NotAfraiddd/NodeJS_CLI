@@ -1,6 +1,6 @@
 const readline = require('readline');
 const { loadFolderData } = require('./lib/fileManager');
-const { addFile, addFolder, removeItem, display, search, navigate, updateNameFolder } = require('./src/command');
+const { addFile, addFolder, removeItem, display, search, navigate, updateNameFolder, updateNameFile } = require('./src/command');
 
 const root = loadFolderData();
 let currentFolder = root;
@@ -41,7 +41,7 @@ const executeCommand = (input) => {
         break;
 
       case '3':
-        updateNameFolder(currentFolder, args);
+        updateNameFile(currentFolder, args);
         break;
 
       case '4':

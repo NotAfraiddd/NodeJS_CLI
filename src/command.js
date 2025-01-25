@@ -32,6 +32,19 @@ const updateNameFolder = (folder, args) => {
 };
 
 /**
+ * Update name file.
+ * @param {Folder} folder
+ * @param {Array} args
+ */
+const updateNameFile = (folder, args) => {
+    const oldName = args[0];
+    const newName = args[1];
+
+    folder.updateNameFile(oldName, newName);
+    console.log(`File  "${oldName}" updated to "${newName}".`);
+};
+
+/**
  * Remove an item from the folder.
  * @param {Folder} folder
  * @param {Array} args
@@ -72,4 +85,4 @@ const navigate = (folder, args, pathStack) => {
     return folder.navigateFolder(target, pathStack);
 };
 
-module.exports = { addFile, addFolder, removeItem, display, search, navigate, updateNameFolder };
+module.exports = { addFile, addFolder, removeItem, display, search, navigate, updateNameFolder, updateNameFile };
