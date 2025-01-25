@@ -1,0 +1,36 @@
+{
+  "name": "root",
+  "items": {
+    "chibao.txt": {
+      "name": "chibao.txt",
+      "content": "content"
+    },
+    "a": {
+      "name": "a",
+      "items": {
+        "a.txt": {
+          "name": "a.txt",
+          "content": "lplp"
+        }
+      }
+    },
+    "b": {
+      "name": "b",
+      "items": {
+        "ab": {
+          "name": "ab",
+          "items": {
+            "a": {
+              "name": "a",
+              "content": "a"
+            }
+          }
+        },
+        "abc.txt": {
+          "name": "abc.txt",
+          "content": "pp"
+        }
+      }
+    }
+  }
+}
