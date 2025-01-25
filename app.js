@@ -1,24 +1,11 @@
-const fs = require('fs');
-const Folder = require('./src/Folder');
-
-const loadFolderData = () => {
-  if (fs.existsSync('folderData.json')) {
-    const data = fs.readFileSync('folderData.json', 'utf-8');
-    return Folder.fromJSON(JSON.parse(data));
-  }
-  return new Folder('root');
-};
-
-const saveFolderData = (folder) => {
-  const jsonData = JSON.stringify(folder.toJSON(), null, 2);
-  fs.writeFileSync('folderData.json', jsonData, 'utf-8');
-};
+const readline = require('readline');
+const { loadFolderData } = require('./lib/fileManager');
+const { addFile, addFolder, removeItem, display, search, navigate } = require('./src/command');
 
 const root = loadFolderData();
 let currentFolder = root;
 let pathStack = [];
 
-const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -35,54 +22,39 @@ Commands:
 7. exit                                   ==> 7
 `;
 
-// CLI handler
+console.log('Folder Tree CLI');
+console.log(commands);
+
 const executeCommand = (input) => {
   const [cmd, ...args] = input.trim().split(' ');
 
   try {
     switch (cmd) {
-      case '1': // Add file
-        currentFolder.addFile(args[0], args.slice(1).join(' '));
-        console.log(`File "${args[0]}" added.`);
-        saveFolderData(root);
+      case '1': 
+        addFile(currentFolder, args);
         break;
 
-      case '2': // Add folder
-        currentFolder.addFolder(args[0]);
-        console.log(`Folder "${args[0]}" added.`);
-        saveFolderData(root);
+      case '2':
+        addFolder(currentFolder, args);
         break;
 
-      case '3': // Remove item
-        currentFolder.removeItem(args[0]);
-        console.log(`Item "${args[0]}" removed.`);
-        saveFolderData(root);
+      case '3': 
+        removeItem(currentFolder, args);
         break;
 
-      case '4': // Display current folder
-        console.log(`Current folder: ${currentFolder.name}`);
-        currentFolder.display();
+      case '4': 
+        display(currentFolder);
         break;
 
-      case '5': // Search
-        const result = root.search(args[0]);
-        if (result) {
-          console.log(`Found: ${result.name}`);
-        } else {
-          console.log(`"${args[0]}" not found.`);
-        }
+      case '5': 
+        search(root, args);
         break;
 
-      case '6': // navigate
-        if (args[0] === 'cd') {
-          const target = args.slice(1).join(' ');
-          currentFolder = currentFolder.navigateFolder(target, pathStack);
-        } else {
-          console.log('Invalid command. Use "6 cd <folder>" to navigate.');
-        }
+      case '6': 
+        currentFolder = navigate(currentFolder, args, pathStack);
         break;
 
-      case '7': // Exit
+      case '7': 
         console.log('Goodbye!');
         rl.close();
         return;
@@ -94,9 +66,6 @@ const executeCommand = (input) => {
     console.error(error.message);
   }
 };
-
-console.log('Folder Tree CLI');
-console.log(commands);
 
 rl.on('line', (input) => {
   executeCommand(input);

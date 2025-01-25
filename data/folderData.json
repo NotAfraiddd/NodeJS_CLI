@@ -1,0 +1,26 @@
+{
+  "name": "b",
+  "items": {
+    "ab": {
+      "name": "ab",
+      "items": {
+        "a": {
+          "name": "a",
+          "content": "a"
+        }
+      }
+    },
+    "abc.txt": {
+      "name": "abc.txt",
+      "content": "pp"
+    },
+    "test.abc": {
+      "name": "test.abc",
+      "content": "ako"
+    },
+    "test1.txt": {
+      "name": "test1.txt",
+      "content": "ako"
+    }
+  }
+}
