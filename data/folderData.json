@@ -1,25 +1,25 @@
 {
-  "name": "b",
+  "name": "root",
   "items": {
-    "ab": {
-      "name": "ab",
+    "a": {
+      "name": "a",
       "items": {
-        "a": {
-          "name": "a",
-          "content": "a"
+        "a1": {
+          "name": "a1",
+          "content": "a1"
         }
       }
     },
-    "abc.txt": {
-      "name": "abc.txt",
+    "b.txt": {
+      "name": "b.txt",
       "content": "pp"
     },
-    "test.abc": {
-      "name": "test.abc",
+    "c.pdf": {
+      "name": "c.pdf",
       "content": "ako"
     },
-    "test1.txt": {
-      "name": "test1.txt",
+    "d.txt": {
+      "name": "d.txt",
       "content": "ako"
     }
   }

@@ -1,6 +1,6 @@
 const readline = require('readline');
 const { loadFolderData } = require('./lib/fileManager');
-const { addFile, addFolder, removeItem, display, search, navigate } = require('./src/command');
+const { addFile, addFolder, removeItem, display, search, navigate, updateNameFolder } = require('./src/command');
 
 const root = loadFolderData();
 let currentFolder = root;
@@ -15,11 +15,13 @@ const commands = `
 Commands:
 1. add-file                               ==> 1 [name] [content]
 2. add-folder [name]                      ==> 2 [name]
-3. remove [name]                          ==> 3 [name]
-4. display                                ==> 4
-5. search [name]                          ==> 5 [name]
-6. cd [folderName] / cd ..                ==> 6 cd [folderName] / 6 cd .. ( back to nearest parent directory )
-7. exit                                   ==> 7
+3. update-name-file                       ==> 3 [oldFile] [newFile]
+4. update-name-folder                     ==> 4 [oldFolder] [newFolder]
+5. remove [name]                          ==> 5 [name]
+6. display                                ==> 6
+7. search [name]                          ==> 7 [name]
+8. cd [folderName] / cd ..                ==> 8 cd [folderName] / 6 cd .. ( back to nearest parent directory )
+9. exit                                   ==> 9
 `;
 
 console.log('Folder Tree CLI');
@@ -30,7 +32,7 @@ const executeCommand = (input) => {
 
   try {
     switch (cmd) {
-      case '1': 
+      case '1':
         addFile(currentFolder, args);
         break;
 
@@ -38,23 +40,31 @@ const executeCommand = (input) => {
         addFolder(currentFolder, args);
         break;
 
-      case '3': 
+      case '3':
+        updateNameFolder(currentFolder, args);
+        break;
+
+      case '4':
+        updateNameFolder(currentFolder, args);
+        break;
+
+      case '5':
         removeItem(currentFolder, args);
         break;
 
-      case '4': 
+      case '6':
         display(currentFolder);
         break;
 
-      case '5': 
+      case '7':
         search(root, args);
         break;
 
-      case '6': 
+      case '8':
         currentFolder = navigate(currentFolder, args, pathStack);
         break;
 
-      case '7': 
+      case '9':
         console.log('Goodbye!');
         rl.close();
         return;

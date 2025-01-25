@@ -137,6 +137,25 @@ class Folder {
       return tempFolder;
     }
   }
+
+  /**
+   * Update name folder
+   * @param {string} oldName - Old folder name.
+   * @param {string} newName - New folder name.
+   */
+  updateNameFolder(oldName, newName) {
+    if (this.items[newName]) {
+      console.log(`A folder with the name "${newName}" already exists.`);
+      return;
+    }
+
+    const folderItem = this.items[oldName];
+    folderItem.name = newName;
+    this.items[newName] = folderItem;
+    delete this.items[oldName];
+
+    console.log(`Folder name updated from "${oldName}" to "${newName}".`);
+  }
 }
 
 module.exports = Folder;

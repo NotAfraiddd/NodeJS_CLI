@@ -1,14 +1,11 @@
-const { saveFolderData } = require('../lib/fileManager');
-
 /**
  * Add a file to the folder.
  * @param {Folder} folder
  * @param {Array} args
  */
 const addFile = (folder, args) => {
-  folder.addFile(args[0], args.slice(1).join(' '));
-  console.log(`File "${args[0]}" added.`);
-  saveFolderData(folder);
+    folder.addFile(args[0], args.slice(1).join(' '));
+    console.log(`File "${args[0]}" added.`);
 };
 
 /**
@@ -17,9 +14,21 @@ const addFile = (folder, args) => {
  * @param {Array} args
  */
 const addFolder = (folder, args) => {
-  folder.addFolder(args[0]);
-  console.log(`Folder "${args[0]}" added.`);
-  saveFolderData(folder);
+    folder.addFolder(args[0]);
+    console.log(`Folder "${args[0]}" added.`);
+};
+
+/**
+ * Update name folder.
+ * @param {Folder} folder
+ * @param {Array} args
+ */
+const updateNameFolder = (folder, args) => {
+    const oldName = args[0];
+    const newName = args[1];
+
+    folder.updateNameFolder(oldName, newName);
+    console.log(`Folder "${oldName}" updated to "${newName}".`);
 };
 
 /**
@@ -28,9 +37,8 @@ const addFolder = (folder, args) => {
  * @param {Array} args
  */
 const removeItem = (folder, args) => {
-  folder.removeItem(args[0]);
-  console.log(`Item "${args[0]}" removed.`);
-  saveFolderData(folder);
+    folder.removeItem(args[0]);
+    console.log(`Item "${args[0]}" removed.`);
 };
 
 /**
@@ -38,8 +46,8 @@ const removeItem = (folder, args) => {
  * @param {Folder} folder
  */
 const display = (folder) => {
-  console.log(`Current folder: ${folder.name}`);
-  folder.display();
+    console.log(`Current folder: ${folder.name}`);
+    folder.display();
 };
 
 /**
@@ -48,8 +56,8 @@ const display = (folder) => {
  * @param {Array} args
  */
 const search = (root, args) => {
-  const result = root.search(args[0]);
-  console.log(result ? `Found: ${result.name}` : `"${args[0]}" not found.`);
+    const result = root.search(args[0]);
+    console.log(result ? `Found: ${result.name}` : `"${args[0]}" not found.`);
 };
 
 /**
@@ -60,8 +68,8 @@ const search = (root, args) => {
  * @returns {Folder}
  */
 const navigate = (folder, args, pathStack) => {
-  const target = args.slice(1).join(' ');
-  return folder.navigateFolder(target, pathStack);
+    const target = args.slice(1).join(' ');
+    return folder.navigateFolder(target, pathStack);
 };
 
-module.exports = { addFile, addFolder, removeItem, display, search, navigate };
+module.exports = { addFile, addFolder, removeItem, display, search, navigate, updateNameFolder };
